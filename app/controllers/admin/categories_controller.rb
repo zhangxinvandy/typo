@@ -12,6 +12,7 @@ class Admin::CategoriesController < Admin::BaseController
       }
     end
   end
+  
 
   def destroy
     @record = Category.find(params[:id])
@@ -25,7 +26,8 @@ class Admin::CategoriesController < Admin::BaseController
 
   def new_or_edit
     @categories = Category.find(:all)
-    @category = Category.find(params[:id])
+    # @category = Category.find(params[:id])
+    @category = params[:id] ? Category.find(params[:id]) : Category.new
     @category.attributes = params[:category]
     if request.post?
       respond_to do |format|
@@ -50,5 +52,8 @@ class Admin::CategoriesController < Admin::BaseController
     end
     redirect_to :action => 'new'
   end
+  
+
+
 
 end
